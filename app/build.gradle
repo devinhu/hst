@@ -3,6 +3,16 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+
+    signingConfigs {
+        release {
+            storeFile file("hst.jks")
+            storePassword "devin19881010"
+            keyAlias "jingdl_hst"
+            keyPassword "devin19881010"
+        }
+    }
+
     defaultConfig {
         applicationId "com.jingdl.hst"
         minSdkVersion 14
@@ -11,8 +21,15 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
